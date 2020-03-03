@@ -3,16 +3,8 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title th:text="#{application.title}"></title>
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-  <!-- Custom styles for this template -->
-  <link rel="stylesheet" th:href="@{/css/modern-business.css}"/>
+  <!-- head -->
+  <div th:include="fragments/head :: head"></div>
 
 </head>
 
@@ -111,11 +103,6 @@
   <!-- /.container -->
 
   <div th:insert="~{fragments/footer :: footer}">...</div>
-
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" th:src="@{/jquery/jquery.min.js}"></script>
-  <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
 </body>
 
 </html>
