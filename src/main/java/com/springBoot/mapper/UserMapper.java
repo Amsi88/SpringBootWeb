@@ -9,5 +9,5 @@ import com.springBoot.entity.Users;
 public interface UserMapper {
  
     UsersDto usersToUsersDto(Users user);
-    Users usersDtoTousers(UsersDto user);
+    Users usersDtoToUsers(UsersDto user);
 }

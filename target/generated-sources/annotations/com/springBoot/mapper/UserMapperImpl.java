@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-03-02T11:48:51+0100",
+    date = "2020-03-03T15:42:11+0100",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_201 (Oracle Corporation)"
 )
 @Component
@@ -32,7 +32,7 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public Users usersDtoTousers(UsersDto user) {
+    public Users usersDtoToUsers(UsersDto user) {
         if ( user == null ) {
             return null;
         }

@@ -1,13 +1,12 @@
 package com.springBoot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Users {
-	
+
 	@Id
+	@Column(name="US_ID", unique=true, nullable=false)
     private Long usId;
 	
     @Column(name = "US_LOGIN")

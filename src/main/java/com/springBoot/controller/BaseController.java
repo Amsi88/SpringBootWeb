@@ -35,57 +35,8 @@ public class BaseController implements WebMvcConfigurer {
 
 	UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
-	@GetMapping("/formUser")
-	public String userForm(Model model) {
-		model.addAttribute("userDto", new UsersDto());
-		return "formUser";
-	}
-
-	@PostMapping("/formUserCreate")
-	public UsersDto create(@RequestBody UsersDto userDto) {
-		List<UsersDto> listUser = userService.getAllUsers();
-		// Validate same Login name
-		for (UsersDto us : listUser) {
-			if (us.getUsLogin().equals(userDto.getUsLogin())) {
-				return userDto;
-			}
-		}
-
-		// GetiD
-		userDto.setUsId((long) (listUser.size() + 1));
-
-		userService.save(mapper.usersDtoTousers(userDto));
-		System.out.println(userDto);
-		return userDto;
-	}
-
-	@PostMapping("/formUser")
-	public String userSubmit(@ModelAttribute("userDto") @Valid UsersDto userDto, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			return "formUser";
-		}
-
-		List<UsersDto> listUser = userService.getAllUsers();
-		// Validate same Login name
-		for (UsersDto us : listUser) {
-			if (us.getUsLogin().equals(userDto.getUsLogin())) {
-				result.rejectValue(US_LOGIN, SAME_USER,
-						ResourceBundle.getBundle(BUNDLE_MESSAGES).getString(BUNDLE_VALIDATE_LOGIN_NAME_EXISTS));
-				return "formUser";
-			}
-		}
-
-		// GetiD
-		userDto.setUsId((long) (listUser.size() + 1));
-
-		userService.save(mapper.usersDtoTousers(userDto));
-		model.addAttribute("userDto", userDto);
-		return "login";
-	}
-
 	@GetMapping("/indexMenu")
-	public String userFormCreate(HttpServletRequest request,Model model) {
+	public String userFormCreate(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 
@@ -100,23 +51,5 @@ public class BaseController implements WebMvcConfigurer {
 			session.setAttribute("userDto", mapper.usersToUsersDto(userService.findByUsLogin(usLogin)));
 		}
 		return "indexMenu";
-	}
-
-	@RequestMapping(value="/")
-	public String showTest() {
-		System.out.println("Here we go !!");
-		return "indexMenu";
-	}
-	
-	@GetMapping("/formAllServices")
-	public String formAllServices(Model model) {
-		model.addAttribute("userDto", new UsersDto());
-		return "formAllServices";
-	}
-	
-	@GetMapping("/formServiceAddress")
-	public String formServiceAddress(Model model) {
-		model.addAttribute("userDto", new UsersDto());
-		return "formServiceAddress";
 	}
 }
