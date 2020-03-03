@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -84,16 +85,26 @@ public class BaseController implements WebMvcConfigurer {
 	}
 
 	@GetMapping("/indexMenu")
-	public String userFormCreate(Model model) {
-		String usLogin = "";
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			usLogin = ((UserDetails) principal).getUsername();
-		} else {
-			usLogin = principal.toString();
-		}
+	public String userFormCreate(HttpServletRequest request,Model model) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
 
-		model.addAttribute("userDto", mapper.usersToUsersDto(userService.findByUsLogin(usLogin)));
+			String usLogin = "";
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				usLogin = ((UserDetails) principal).getUsername();
+			} else {
+				usLogin = principal.toString();
+			}
+
+			session.setAttribute("userDto", mapper.usersToUsersDto(userService.findByUsLogin(usLogin)));
+		}
+		return "indexMenu";
+	}
+
+	@RequestMapping(value="/")
+	public String showTest() {
+		System.out.println("Here we go !!");
 		return "indexMenu";
 	}
 	
