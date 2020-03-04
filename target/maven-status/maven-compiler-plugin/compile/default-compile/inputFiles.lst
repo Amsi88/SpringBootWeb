@@ -10,5 +10,6 @@ C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\se
 C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\entity\Users.java
 C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\service\UserDetailsServiceImp.java
 C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\controller\BaseController.java
-C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\security\CorsFilter.java
 C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\Application.java
+C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\controller\UserController.java
+C:\Users\igarciac\Documents\GitHub\SpringBootApp\src\main\java\com\springBoot\controller\BaseErrorController.java

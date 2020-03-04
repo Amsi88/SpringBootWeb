@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    public List<UsersDto> getUsersById(long userId);
-    public List<UsersDto> getAllUsers();
-    public Users save(Users user);
-    public Users findByUsLogin(String usLogin);
+    List<UsersDto> getUsersById(long userId);
+    List<UsersDto> getAllUsers();
+    void save(Users user);
+    Users findByUsLogin(String usLogin);
 }

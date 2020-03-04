@@ -9,7 +9,7 @@ import com.springBoot.entity.Users;
 
 @Repository
 public interface UserRepository extends CrudRepository<Users, Long> {
-    public List<Users> findByUsId(long userId);
-    public List<Users> findAll();
-    public Users findByUsLogin(String usLogin);
+    List<Users> findByUsId(long userId);
+    List<Users> findAll();
+    Users findByUsLogin(String usLogin);
 }
