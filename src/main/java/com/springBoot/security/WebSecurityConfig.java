@@ -20,8 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .addFilterBefore(corsFilter(), SessionManagementFilter.class) //adds your custom CorsFilter
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/formUser").
                 permitAll().antMatchers(HttpMethod.OPTIONS, "/**")
                 .permitAll()
@@ -44,11 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
-    };
-
-    @Bean
-    CorsFilter corsFilter() {
-        return new CorsFilter();
     }
 
     @Override
@@ -59,5 +53,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
       return new UserDetailsServiceImp();
-    };
+    }
 }
