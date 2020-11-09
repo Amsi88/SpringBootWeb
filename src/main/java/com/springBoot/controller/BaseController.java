@@ -35,21 +35,30 @@ public class BaseController implements WebMvcConfigurer {
 
 	UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
-	@GetMapping("/indexMenu")
-	public String userFormCreate(HttpServletRequest request, Model model) {
+	@PostMapping("/loginUser")
+	public String userFormLogin(@ModelAttribute("userDto") UsersDto userDto, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-
-			String usLogin = "";
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			if (principal instanceof UserDetails) {
-				usLogin = ((UserDetails) principal).getUsername();
-			} else {
-				usLogin = principal.toString();
-			}
-
-			session.setAttribute("userDto", mapper.usersToUsersDto(userService.findByUsLogin(usLogin)));
+			session.setAttribute("userDto", mapper.usersToUsersDto(userService.findByUsLogin(userDto.getUsLogin())));
 		}
 		return "indexMenu";
 	}
+
+	@GetMapping("/login")
+	public String loadLogin(Model model) {
+		model.addAttribute("userDto", new UsersDto());
+		return "login";
+	}
+
+	@GetMapping("/logout")
+	public String logout(Model model, HttpServletRequest request) {
+		model.addAttribute("userDto", new UsersDto());
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.setAttribute("userDto",null);
+		}
+		return "indexMenu";
+	}
+
+
 }

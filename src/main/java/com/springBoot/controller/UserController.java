@@ -39,8 +39,8 @@ public class UserController implements WebMvcConfigurer{
 
 	@GetMapping("/formUser")
 	public String userForm(Model model) {
-		model.addAttribute("userToEditDto", new UsersDto());
-		return "editUserInfo";
+		model.addAttribute("userDto", new UsersDto());
+		return "formUser";
 	}
 
 	@GetMapping("/formUserEdit")
@@ -50,26 +50,10 @@ public class UserController implements WebMvcConfigurer{
 		return "editUserInfo";
 	}
 
+	
+
 	@PostMapping("/formUserCreate")
-	public UsersDto create(@RequestBody UsersDto userDto) {
-		List<UsersDto> listUser = userService.getAllUsers();
-		// Validate same Login name
-		for (UsersDto us : listUser) {
-			if (us.getUsLogin().equals(userDto.getUsLogin())) {
-				return userDto;
-			}
-		}
-
-		// GetiD
-		userDto.setUsId((long) (listUser.size() + 1));
-
-		userService.save(mapper.usersDtoToUsers(userDto));
-		System.out.println(userDto);
-		return userDto;
-	}
-
-	@PostMapping("/formUser")
-	public String userSubmit(@ModelAttribute("userDto") @Valid UsersDto userDto, BindingResult result, Model model) {
+	public String create(@ModelAttribute("userDto") @Valid UsersDto userDto, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			return "formUser";
@@ -90,7 +74,7 @@ public class UserController implements WebMvcConfigurer{
 
 		userService.save(mapper.usersDtoToUsers(userDto));
 		model.addAttribute("userDto", userDto);
-		return "login";
+		return "indexMenu";
 	}
 
 	@PostMapping("/formUserEdit")

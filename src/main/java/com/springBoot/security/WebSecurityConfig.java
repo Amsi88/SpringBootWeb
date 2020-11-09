@@ -21,23 +21,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/formUser").
-                permitAll().antMatchers(HttpMethod.OPTIONS, "/**")
-                .permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .successHandler(new SimpleAuthenticationSuccessHandler())
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();
+                .antMatchers("/", "/formUser", "/indexMenu", "/resources/**").
+                permitAll();
     }
     
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
-        webSecurity.ignoring().antMatchers("/resources/**");
+        webSecurity.ignoring().antMatchers("/resources/**", "/");
     }
 
     @Bean

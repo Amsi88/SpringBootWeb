@@ -2,11 +2,35 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+
 	<!-- head -->
 	<div th:include="fragments/head :: head"></div>
+
 </head>
+
 <body>
-	<form action="#" th:action="@{/formUser}" th:object="${userDto}"
+
+<!-- Navigation -->
+<div th:replace="fragments/menu :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+	<!-- Page Heading/Breadcrumbs -->
+	<h1 class="mt-4 mb-3">
+		<span th:text="#{value.text.crearUsuario}"/>
+	</h1>
+
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="indexMenu">Home</a>
+		</li>
+		<li class="breadcrumb-item active">
+			<span th:text="#{value.text.crearUsuario}"/>
+		</li>
+	</ol>
+
+	<form action="#" th:action="@{/formUserCreate}" th:object="${userDto}"
 		method="post">
 		<div class="container">
 			<div id="signupbox" style="margin-top: 50px"
@@ -83,10 +107,6 @@
 									class="btn btn-primary btn btn-info">
 									<span th:text="#{value.button.guardar}"></span>
 								</button>
-								<button type="button" id="buttonVolver"
-									class="btn btn-secondary" onclick="location.href='/springBoot/login'">
-									<span th:text="#{value.button.volver}"></span>
-								</button>
 							</div>
 						</div>
 					</div>
@@ -94,5 +114,8 @@
 			</div>
 		</div>
 	</form>
+</div>
+<!-- Footer -->
+<div th:insert="~{fragments/footer :: footer}">...</div>
 </body>
 </html>
